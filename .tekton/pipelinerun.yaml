@@ -78,6 +78,7 @@ spec:
           - noop-task
         taskRef:
           name: send-to-webhook-slack
+          kind: ClusterTask
         params:
           - name: bot-name
             value: iHubBot
