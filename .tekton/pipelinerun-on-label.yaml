@@ -1,0 +1,23 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: "pipelinerun-on-label-zmgn"
+  annotations:
+    pipelinesascode.tekton.dev/target-namespace: "pac-e2e-ns-jzr2r"
+    pipelinesascode.tekton.dev/on-target-branch: "[main]"
+    pipelinesascode.tekton.dev/on-event: "[pull_request]"
+    pipelinesascode.tekton.dev/on-label: "[bug]"
+spec:
+  pipelineSpec:
+    tasks:
+      - name: task
+        taskSpec:
+          steps:
+            - name: success
+              image: registry.access.redhat.com/ubi9/ubi-micro
+              script: |
+                echo "Labels on PR: "
+                for i in $(echo -e "{{ pull_request_labels }}");do
+                  echo $i
+                done
